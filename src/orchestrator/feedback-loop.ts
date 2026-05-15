@@ -77,9 +77,8 @@ Format your response as JSON:
         {
           type: 'text',
           text: FEEDBACK_SYSTEM_PROMPT,
-          // @ts-expect-error cache_control is valid per API docs
           cache_control: { type: 'ephemeral' },
-        },
+        } as Anthropic.TextBlockParam & { cache_control: { type: string } },
       ],
       messages: [{ role: 'user', content: prompt }],
     });

@@ -129,14 +129,12 @@ export async function orchestrate(input: OrchestratorInput): Promise<Orchestrato
     const response = await client.messages.create({
       model: 'claude-opus-4-7',
       max_tokens: 4096,
-      thinking: { type: 'adaptive' },
       system: [
         {
           type: 'text',
           text: SYSTEM_PROMPT,
-          // @ts-expect-error cache_control is valid per API docs
           cache_control: { type: 'ephemeral' },
-        },
+        } as Anthropic.TextBlockParam & { cache_control: { type: string } },
       ],
       tools: TOOLS,
       messages,

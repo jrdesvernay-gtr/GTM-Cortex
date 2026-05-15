@@ -78,7 +78,7 @@ async function getDataset(datasetId: string): Promise<unknown[]> {
       `${APIFY_BASE_URL}/datasets/${datasetId}/items`,
       { params: { token: apiToken, clean: true, format: 'json' } }
     );
-    return response.data as unknown[];
+    return response.data.items;
   } catch (err) {
     logger.error('Failed to fetch dataset', err);
     throw err;
